@@ -150,7 +150,7 @@ for i in range(node_limit):
         print("goal reached")
         goal_found = True
         break
-    plt.pause(0.05)
+    # plt.pause(0.05)
 
 
 
