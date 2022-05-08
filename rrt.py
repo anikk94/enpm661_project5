@@ -79,7 +79,23 @@ def get_path():
 def draw_path(path):
     for node in path:
         x, y = node[0]
-        plt.plot([x], [y], "go")   
+        plt.plot([x], [y], "go")  
+
+
+
+        
+def save_path(revpath):
+    file = open("output.txt", "w+")
+    path = []
+    for node in revpath:
+        x, y = node[0]
+        path.append(node[0])
+    path = path[::-1]
+   
+    for x, y in path:
+        file.write(str(round(x,2)) + ' ' + str(round(y,2)))
+        file.write('\n')
+    file.close()
 
 # __/\\\\____________/\\\\_____/\\\\\\\\\_____/\\\\\\\\\\\__/\\\\\_____/\\\_        
 #  _\/\\\\\\________/\\\\\\___/\\\\\\\\\\\\\__\/////\\\///__\/\\\\\\___\/\\\_       
@@ -99,8 +115,8 @@ node_list = [start_node]
 node_count = 0
 
 # tuning parameters
-node_limit = 200
-step_size = 0.8
+node_limit = 1000
+step_size = 0.5
 threshold = step_size * 1.1
 
 # draw start, goal and goal area
@@ -136,10 +152,13 @@ for i in range(node_limit):
         break
     plt.pause(0.05)
 
+
+
 if goal_found:
     # do...
     path_to_goal = get_path()
     draw_path(path_to_goal)
+    save_path(path_to_goal)
 else:
     print("goal not found, increase node limit")
 

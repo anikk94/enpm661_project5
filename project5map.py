@@ -1,66 +1,76 @@
 import matplotlib.pyplot as plt
 
+r = 0.1
+c = 0.05
+t = r + c
+
 # rectangle1 definition
 # point is inside if:
 def rectangle1(x, y):
-    if x >= 0.25 and \
-       x <= 1.75 and \
-       y >= 4.25 and \
-       y <= 5.75:
+    if x >= 0.25 - t and \
+       x <= 1.75 + t and \
+       y >= 4.25 - t and \
+       y <= 5.75 + t:
         return True
     return False
 # rectangle2 definition
 # point is inside if:
 def rectangle2(x, y):
-    if x >= 3.75 and \
-       x <= 6.25 and \
-       y >= 4.25 and \
-       y <= 5.75:
+    if x >= 3.75 - t and \
+       x <= 6.25 + t and \
+       y >= 4.25 - t and \
+       y <= 5.75 + t:
         return True
     return False
 # rectangle3 definition
 # point is inside if:
 def rectangle3(x, y):
-    if x >= 7.25 and \
-       x <= 8.75 and \
-       y >= 2 and \
-       y <= 4:
+    if x >= 7.25 - t and \
+       x <= 8.75 + t and \
+       y >= 2 - t and \
+       y <= 4 + t:
         return True
     return False
 # circle1 definition
 # point is inside if:
 def circle1(x, y):
-    if (pow(x-2,2)+pow(y-2,2)) <= 1:
+    if (pow(x-2,2)+pow(y-2,2)) <= (1 + t) ** 2:
         return True
     return False
 # circle2 definition
 # point is inside if:
 def circle2(x, y):
-    if (pow(x-2,2)+pow(y-8,2)) <= 1:
+    if (pow(x-2,2)+pow(y-8,2)) <= (1 + t) ** 2:
         return True
     return False
 
 # combined obstacle
 def is_obstacle(x, y):
-    if x >= 0.25 and \
-       x <= 1.75 and \
-       y >= 4.25 and \
-       y <= 5.75:
+    if x >= 0.25 - t and \
+       x <= 1.75 + t and \
+       y >= 4.25 - t and \
+       y <= 5.75 + t:
         return True
-    if x >= 3.75 and \
-       x <= 6.25 and \
-       y >= 4.25 and \
-       y <= 5.75:
+    if x >= 3.75 - t and \
+       x <= 6.25 + t and \
+       y >= 4.25 - t and \
+       y <= 5.75 + t:
         return True
-    if x >= 7.25 and \
-       x <= 8.75 and \
-       y >= 2 and \
-       y <= 4:
+    if x >= 7.25 - t and \
+       x <= 8.75 + t and \
+       y >= 2 - t and \
+       y <= 4 + t:
         return True
-    if (pow(x-2,2)+pow(y-2,2)) <= 1:
+    if (pow(x-2,2)+pow(y-2,2)) <= (1 + t) ** 2:
         return True
-    if (pow(x-2,2)+pow(y-8,2)) <= 1:
+    if (pow(x-2,2)+pow(y-8,2)) <= (1 + t) ** 2:
         return True
+    if x <= t and \
+       x >= 10 - t and \
+       y <= t and \
+       y >= 10 - t:
+        return True   
+            
     return False
 
 if __name__ == "__main__":
