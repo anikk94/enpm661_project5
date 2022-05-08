@@ -44,7 +44,7 @@ class GoToPose():
         goal.target_pose.header.stamp = rospy.Time.now()
         goal.target_pose.pose = Pose(Point(pos['x'], pos['y'], 0.000),
                                         Quaternion(quat['r1'], quat['r2'], quat['r3'], quat['r4']))
-
+  
          # Start moving
         self.move_base.send_goal(goal)
 
@@ -69,25 +69,41 @@ class GoToPose():
         rospy.loginfo("Stop")
         rospy.sleep(1)
 
+
 if __name__ == '__main__':
+
+    with open('outputrrtconnect.txt') as f:
+        lines = f.readlines()
+            
+    x = []
+    y = []
+    for line in lines:
+        x_, y_ = line.strip().split(" ")
+        x.append(float(x_))
+        y.append(float(y_))
+
+    
     try:
         rospy.init_node('nav_test', anonymous=False)
         navigator = GoToPose()
+        for i in range(len(x)):
+            if (i % 10 == 0):
+            # Customize the following values so they are appropriate for your location
+                position = {'x': x[i] - 5.0, 'y' : y[i] - 5.0}
+                quaternion = {'r1' : 0.000, 'r2' : 0.000, 'r3' : 0.000, 'r4' : 1.000}
 
-        # Customize the following values so they are appropriate for your location
-        position = {'x': 1.22, 'y' : 2.56}
-        quaternion = {'r1' : 0.000, 'r2' : 0.000, 'r3' : 0.000, 'r4' : 1.000}
-
-        rospy.loginfo("Go to (%s, %s) pose", position['x'], position['y'])
-        success = navigator.goto(position, quaternion)
+                rospy.loginfo("Go to (%s, %s) pose", position['x'], position['y'])
+                success = navigator.goto(position, quaternion)
+                # Sleep to give the last log messages time to be sent
+                rospy.sleep(0.1)
 
         if success:
             rospy.loginfo("Hooray, reached the desired pose")
         else:
             rospy.loginfo("The base failed to reach the desired pose")
 
-        # Sleep to give the last log messages time to be sent
-        rospy.sleep(1)
+            # Sleep to give the last log messages time to be sent
+            rospy.sleep(0.1)
 
     except rospy.ROSInterruptException:
         rospy.loginfo("Ctrl-C caught. Quitting")

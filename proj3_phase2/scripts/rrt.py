@@ -18,8 +18,8 @@ import numpy as np
 
 class Env:
     def __init__(self):
-        self.x_range = (0, 50)
-        self.y_range = (0, 30)
+        self.x_range = (0, 100)
+        self.y_range = (0, 100)
         self.obs_boundary = self.obs_boundary()
         self.obs_circle = self.obs_circle()
         self.obs_rectangle = self.obs_rectangle()
@@ -27,31 +27,27 @@ class Env:
     @staticmethod
     def obs_boundary():
         obs_boundary = [
-            [0, 0, 1, 30],
-            [0, 30, 50, 1],
-            [1, 0, 50, 1],
-            [50, 1, 1, 30]
+            [0, 0, 1, 100],
+            [0, 100, 100, 1],
+            [1, 0, 100, 1],
+            [100, 1, 1, 100]
         ]
         return obs_boundary
 
     @staticmethod
     def obs_rectangle():
         obs_rectangle = [
-            [14, 12, 8, 2],
-            [18, 22, 8, 3],
-            [26, 7, 2, 12],
-            [32, 14, 10, 2]
-        ]
+            [1.5, 40.5, 16, 16],
+            [36.5, 40.5, 26, 16],
+            [71.5, 19, 16, 21]
+            ]
         return obs_rectangle
 
     @staticmethod
     def obs_circle():
         obs_cir = [
-            [7, 12, 3],
-            [46, 20, 2],
-            [15, 5, 2],
-            [37, 7, 3],
-            [37, 23, 3]
+            [20, 20, 11],
+            [20, 80, 11]
         ]
 
         return obs_cir
@@ -361,13 +357,18 @@ class Rrt:
 
 
 
-x_start = (2, 2)  # Starting node
-x_goal = (49, 24)  # Goal node
+x_start = (10, 10)  # Starting node
+x_goal = (90, 90)  # Goal node
 
 rrt = Rrt(x_start, x_goal, 0.5, 0.05, 10000)
 path = rrt.planning()
 
 if path:
+    file = open("outputrrt.txt", "w+")
+    for x,y in path:
+        file.write(str(round((x / 10),2)) + ' ' + str(round((y / 10),2)))
+        file.write('\n')
+    file.close()
     rrt.plotting.animation(rrt.vertex, path, "RRT", True)
 else:
     print("No Path Found!")

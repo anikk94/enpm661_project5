@@ -11,8 +11,8 @@ class map_navigation():
 
 
     # declare the coordinates of interest
-    self.xgoal = 9.0
-    self.ygoal = 9.0
+    self.xgoal = 0.0
+    self.ygoal = 0.0
     self.goalReached = False
     # initiliaze
     rospy.init_node('map_navigation', anonymous=False)

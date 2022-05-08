@@ -1,7 +1,7 @@
 <launch>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
-  <arg name="x_pos" default="-1.0"/>
-  <arg name="y_pos" default="1.0"/>
+  <arg name="x_pos" default="-4.0"/>
+  <arg name="y_pos" default="-4.0"/>
   <arg name="z_pos" default="0.0"/>
   <arg name="yaw" default="0.0"/>
   <arg name="map_file" default="$(find proj3_phase2)/maps/maptb.yaml" />
