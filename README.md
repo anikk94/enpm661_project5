@@ -59,6 +59,3 @@ Open a new terminal and run,
 $ cd final_project/scripts/
 $ python3 move.py
 ```
-
-### Github Link
-https://github.com/pulkitmehta09/ENPM661-Project3/tree/main/proj3_phase2
